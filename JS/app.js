@@ -7,6 +7,7 @@ function Position(x, y, dir) {
 const marsRover = function (corner, ...rest) {
   const [maxX, maxY] = corner.split(' ')
   const rovers = []
+  const compass = ['W', 'N', 'E', 'S']
 
   for (let i = 0; i < rest.length; i += 2) {
 
@@ -20,23 +21,23 @@ const marsRover = function (corner, ...rest) {
 
   for (const { position, instructions } of rovers) {
     for (const instruction of instructions) {
-      if (instruction === 'M') step(position, maxX, maxY)
-      else spin(position, instruction)
+      if (instruction === 'M') 
+        step(position, maxX, maxY)
+      else 
+        spin(compass, position, instruction)
     }
   }
 
   return rovers.map(r => Object.values(r.position).join(' '))
 }
 
-const spin = (position, direction) => {
-  const compass = ['W', 'N', 'E', 'S']
+const spin = (compass, position, direction) => {
   const currentIndex = compass.indexOf(position.dir)
 
-  if (direction === 'L') {
+  if (direction === 'L')
     position.dir = compass[(currentIndex || compass.length) - 1]
-  } else {
+  else 
     position.dir = compass[(currentIndex + 1) % compass.length]
-  }
 }
 
 const step = (position, maxX, maxY) => {

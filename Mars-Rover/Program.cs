@@ -89,7 +89,10 @@ namespace Mars_Rover
                                 "LMLMLMLMM",
                                 "3 3 E",
                                 "MMRMMRMRRM");
-            Console.WriteLine(positions);
+            positions.ToList().ForEach(p =>
+            {
+                Console.WriteLine(string.Join(" ", p.X, p.Y, p.Direction));
+            });
         }
     }
     public class Position
